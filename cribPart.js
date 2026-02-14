@@ -277,32 +277,63 @@ function initializeDeck() {
     const deckGrid = document.getElementById('deckGrid');
     deckGrid.innerHTML = '';
     
+    // Organize cards by suit
+    const cardsBySuit = {
+        '♠': [],
+        '♥': [],
+        '♦': [],
+        '♣': []
+    };
+    
     DECK.forEach(card => {
-        const cardEl = document.createElement('div');
-        cardEl.className = 'deck-card';
-        cardEl.dataset.card = formatCard(card);
-        
-        // Add color class for red suits
-        if (card.suit === '♥' || card.suit === '♦') {
-            cardEl.classList.add('red');
+        cardsBySuit[card.suit].push(card);
+    });
+    
+    // Create suit headers first (for mobile layout)
+    SUITS.forEach(suit => {
+        const suitHeader = document.createElement('div');
+        suitHeader.className = 'suit-header';
+        suitHeader.textContent = suit;
+        if (suit === '♥' || suit === '♦') {
+            suitHeader.classList.add('red');
         } else {
-            cardEl.classList.add('black');
+            suitHeader.classList.add('black');
         }
-        
-        const rankEl = document.createElement('div');
-        rankEl.className = 'card-rank';
-        rankEl.textContent = card.rank;
-        
-        const suitEl = document.createElement('div');
-        suitEl.className = 'card-suit';
-        suitEl.textContent = card.suit;
-        
-        cardEl.appendChild(rankEl);
-        cardEl.appendChild(suitEl);
-        
-        cardEl.addEventListener('click', () => handleCardClick(card));
-        
-        deckGrid.appendChild(cardEl);
+        deckGrid.appendChild(suitHeader);
+    });
+    
+    // Add cards row by row (one card from each suit per row)
+    RANKS.forEach(rank => {
+        SUITS.forEach(suit => {
+            const card = cardsBySuit[suit].find(c => c.rank === rank);
+            if (card) {
+                const cardEl = document.createElement('div');
+                cardEl.className = 'deck-card';
+                cardEl.dataset.card = formatCard(card);
+                
+                // Add color class for red suits
+                if (card.suit === '♥' || card.suit === '♦') {
+                    cardEl.classList.add('red');
+                } else {
+                    cardEl.classList.add('black');
+                }
+                
+                const rankEl = document.createElement('div');
+                rankEl.className = 'card-rank';
+                rankEl.textContent = card.rank;
+                
+                const suitEl = document.createElement('div');
+                suitEl.className = 'card-suit';
+                suitEl.textContent = card.suit;
+                
+                cardEl.appendChild(rankEl);
+                cardEl.appendChild(suitEl);
+                
+                cardEl.addEventListener('click', () => handleCardClick(card));
+                
+                deckGrid.appendChild(cardEl);
+            }
+        });
     });
     
     updateAvailableCards();
