@@ -678,6 +678,7 @@ header h1 {
 
     .selected-slots {
         justify-content: center;
+        gap: 20px;
     }
 
     .card-slot {
@@ -687,7 +688,11 @@ header h1 {
 
     .deck-grid {
         grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
-        gap: 8px;
+        gap: 12px;
+    }
+
+    .cards-list {
+        gap: 15px;
     }
 
     .total-score {
