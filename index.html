@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cribbage Hand Counter</title>
+    <link rel="stylesheet" href="cribPArt.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎴  Cribbage Counter  🎴</h1>
+        </header>
+
+        <div class="mode-toggle">
+            <label>
+                <input type="radio" name="mode" value="hand" checked>
+                <span>Hand</span>
+            </label>
+            <label>
+                <input type="radio" name="mode" value="crib">
+                <span>Crib</span>
+            </label>
+        </div>
+
+        <div class="card-selection">
+            <h2>Select Cards</h2>
+            <div class="selection-instruction">
+                <p>Select 5 cards from the deck below: 4 for your hand and 1 cut card</p>
+            </div>
+            <div class="hand-cards">
+                <h3>Hand (4 cards)</h3>
+                <div class="selected-slots" id="handSlots">
+                    <div class="card-slot" data-slot="0">
+                        <div class="slot-placeholder">Card 1</div>
+                    </div>
+                    <div class="card-slot" data-slot="1">
+                        <div class="slot-placeholder">Card 2</div>
+                    </div>
+                    <div class="card-slot" data-slot="2">
+                        <div class="slot-placeholder">Card 3</div>
+                    </div>
+                    <div class="card-slot" data-slot="3">
+                        <div class="slot-placeholder">Card 4</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cut-card">
+                <h3>Cut Card</h3>
+                <div class="selected-slots" id="cutSlots">
+                    <div class="card-slot" data-slot="4">
+                        <div class="slot-placeholder">Cut Card</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="deck-grid-container">
+                <h3>Deck</h3>
+                <div class="deck-grid" id="deckGrid"></div>
+            </div>
+        </div>
+
+        <div class="selected-cards">
+            <h2>Selected Cards</h2>
+            <div class="cards-display">
+                <div class="hand-display">
+                    <h3>Hand:</h3>
+                    <div class="cards-list" id="handDisplay"></div>
+                </div>
+                <div class="cut-display">
+                    <h3>Cut:</h3>
+                    <div class="cards-list" id="cutDisplay"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="score-section">
+            <h2>Score</h2>
+            <div class="total-score">
+                <span class="score-label">Total Points:</span>
+                <span class="score-value" id="totalScore">0</span>
+            </div>
+            <div class="score-breakdown" id="scoreBreakdown"></div>
+        </div>
+
+        <div class="actions">
+            <button id="resetBtn" class="btn-reset">Reset</button>
+        </div>
+
+        <div class="error-message" id="errorMessage"></div>
+    </div>
+
+    <script src="cribPart.js"></script>
+</body>
+</html>
